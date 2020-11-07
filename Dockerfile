@@ -1,8 +1,16 @@
-# our base image
-FROM python:3-onbuild
+FROM python:3
 
-# specify the port number the container should expose
+# set a directory for the app
+WORKDIR /usr/src/app
+
+# copy all the files to the container
+COPY . .
+
+# install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# tell the port number the container should expose
 EXPOSE 5000
 
-# run the application
+# run the command
 CMD ["python", "./app.py"]
